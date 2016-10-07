@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 edtLebar.setError(null);
                 edtPanjang.setError(null);
+                txtLuas.setText("");
                 String panjang = edtPanjang.getText().toString().trim();
                 String lebar = edtLebar.getText().toString().trim();
                 if (panjang.matches("")) {
@@ -40,7 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
                     double p = Double.parseDouble(panjang);
                     double l = Double.parseDouble(lebar);
-
+                    if (p == 0){
+                        edtPanjang.setError("This field required not zero");
+                        edtPanjang.requestFocus();
+                    } else if (l == 0) {
+                        edtLebar.setError("This field required not zero");
+                        edtLebar.requestFocus();
+                    }
                     double luas = p * l;
                     txtLuas.setText("Luas : " + luas);
                 }
