@@ -34,15 +34,16 @@ public class MainActivity extends AppCompatActivity {
                 edtPanjang.setError(null);
                 txtLuas.setText("");
 
-                getValueOfField();
+                panjang = edtPanjang.getText().toString().trim();
+                lebar = edtLebar.getText().toString().trim();
 
                 char[] arrayPanjang = panjang.toCharArray();
                 char[] arrayLebar = lebar.toCharArray();
 
-                if (panjang == "" || panjang == ".") {
+                if (panjang.matches("") || panjang == ".") {
                     edtPanjang.setError("This field for length");
                     edtPanjang.requestFocus();
-                } else if (lebar == "" || lebar == ".") {
+                } else if (lebar.matches("") || lebar == ".") {
                     edtLebar.setError("This field for width");
                     edtLebar.requestFocus();
                 } else {
@@ -70,10 +71,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void getValueOfField() {
-        panjang = edtPanjang.getText().toString().trim();
-        lebar = edtLebar.getText().toString().trim();
     }
 }
