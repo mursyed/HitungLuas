@@ -31,27 +31,39 @@ public class MainActivity extends AppCompatActivity {
                 txtLuas.setText("");
                 String panjang = edtPanjang.getText().toString().trim();
                 String lebar = edtLebar.getText().toString().trim();
-                if (panjang.matches("")) {
+
+                char[] arrayPanjang = panjang.toCharArray();
+                char[] arrayLebar = lebar.toCharArray();
+                if (panjang.matches("") || panjang.matches(".")) {
                     edtPanjang.setError("This field for length");
                     edtPanjang.requestFocus();
-                } else if (lebar.matches("")) {
+                } else if (lebar.matches("") || lebar.matches(".")) {
                     edtLebar.setError("This field for width");
                     edtLebar.requestFocus();
                 } else {
-
-                    double p = Double.parseDouble(panjang);
-                    double l = Double.parseDouble(lebar);
-                    if (p == 0){
-                        edtPanjang.setError("This field required not zero");
+                    if (arrayPanjang[0] == '.'){
+                        edtPanjang.setError("This field can't start with dot");
                         edtPanjang.requestFocus();
-                    } else if (l == 0) {
-                        edtLebar.setError("This field required not zero");
+                    } else if (arrayLebar[0] == '.'){
+                        edtLebar.setError("This field can't start with dot");
                         edtLebar.requestFocus();
+                    } else {
+                        double p = Double.parseDouble(panjang);
+                        double l = Double.parseDouble(lebar);
+                        if (p == 0.0d) {
+                            edtPanjang.setError("This field required not zero");
+                            edtPanjang.requestFocus();
+                        } else if (l == 0.0d) {
+                            edtLebar.setError("This field required not zero");
+                            edtLebar.requestFocus();
+                        }else {
+                            double luas = p * l;
+                            txtLuas.setText("Luas : " + luas);
+                        }
                     }
-                    double luas = p * l;
-                    txtLuas.setText("Luas : " + luas);
                 }
             }
         });
+
     }
 }
